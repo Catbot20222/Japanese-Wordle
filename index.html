@@ -126,7 +126,6 @@ function updateThingy() {
         alert(`You've already tried answering ${inputKana}!`);
         return false;
     }
-    alert(guesses)
     guesses.push(`${inputKana}`)
     highlightedinput = checkAnswer(inputKana,randTwana)
     document.getElementById("storage").innerHTML = document.getElementById("storage").innerHTML + '<br>' +highlightedinput;

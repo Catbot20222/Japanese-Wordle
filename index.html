@@ -91,6 +91,7 @@
     }
         </style>
 <script>
+kanafull = "あいうえおアイウエオぁぃぅぇぉかきくけこカキクケコァィゥェォさしすせそサシスセソッーったちつてとタチツテトゃゅょなにぬねのナニヌネノャュョはひふへほハヒフヘホまみむめもマミムメモやゆよヤユヨらりるれろラリルレロわんをワンャがぎぐげごガギグゲゴざじずせぞザジズセゾだでどダデドばびぶべぼバビブベボぱぴぷぺぽパピプペポ";
 function dark() {
     var doc = document.getElementById("darkin");
     document.body.classList.toggle("darkes");
@@ -131,7 +132,7 @@ const twana = [
     "おいしい"
 ];
     
-var randTwana = "はいない"//twana[Math.floor(Math.random() * twana.length)];
+var randTwana = twana[Math.floor(Math.random() * twana.length)];
 var guesses = []
 var closeg = []
 var correct = []
@@ -143,7 +144,7 @@ function Clear() {
     correct = []
     randTwana = twana[Math.floor(Math.random() * twana.length)];
     document.getElementById("lencount").innerHTML = randTwana.length + " Kana Long"
-    document.getElementById("kana list").innerHTML = "あいうえお　アイウエオ　ぁぃぅぇぉ<br>かきくけこ　カキクケコ　ァィゥェォ<br>さしすせそ　サシスセソ　ッ　　　っ<br>たちつてと　タチツテト　ゃ　ゅ　ょ<br>なにぬねの　ナニヌネノ　ャ　ュ　ョ<br>はひふへほ　ハヒフヘホ<br>まみむめみ　マミムメミ<br>や　ゆ　よ　ヤ　ユ　ヨ<br>らりるれろ　ラリルレロ<br>わ　ん　を　ワ　ン　ャ<br>がぎぐげご　ガギグゲゴ<br>ざじずせぞ　ザジズセゾ<br>だ　　でど　ダ　　デド<br>ばびぶべぼ　バビブベボ<br>ぱぴぷぺぽ　パピプペポ<br>";
+    document.getElementById("kana list").innerHTML = "あいうえお　アイウエオ　ぁぃぅぇぉ<br>かきくけこ　カキクケコ　ァィゥェォ<br>さしすせそ　サシスセソ　ッ　ー　っ<br>たちつてと　タチツテト　ゃ　ゅ　ょ<br>なにぬねの　ナニヌネノ　ャ　ュ　ョ<br>はひふへほ　ハヒフヘホ<br>まみむめも　マミムメモ<br>や　ゆ　よ　ヤ　ユ　ヨ<br>らりるれろ　ラリルレロ<br>わ　ん　を　ワ　ン　ャ<br>がぎぐげご　ガギグゲゴ<br>ざじずせぞ　ザジズセゾ<br>だ　　でど　ダ　　デド<br>ばびぶべぼ　バビブベボ<br>ぱぴぷぺぽ　パピプペポ<br>";
     document.getElementById("storage").innerHTML = ''
     guesses = []
     
@@ -179,7 +180,8 @@ function checkAnswer(guess, answer) {
     }
     return(output)
 }
-function updateThingy() {
+function updateThingy(e) {
+    e.preventDefault()
     var inputKana = document.getElementById("guessfield").value;
     if (inputKana.length != randTwana.length) {
     alert(`The Word should be ${randTwana.length} Kana Long!`);
@@ -188,6 +190,13 @@ function updateThingy() {
     } else if (guesses.includes(`${inputKana}`) == true) {
         alert(`You've already tried answering ${inputKana}!`);
         return false;
+    } else {
+        k = false
+        for (let i = 0; i < inputKana.length; i++) {
+            if (kanafull.includes(inputKana[i]) != true){k = true;break;}}
+        if (k){alert(`Your Answer must be in Hiragana or Katakana`);
+        return false;
+        }
     }
     guesses.push(`${inputKana}`)
     highlightedinput = checkAnswer(inputKana,randTwana)
@@ -204,25 +213,27 @@ function updateText() {
 </head>
 
 <body onload="setLen()" class="default">
-<button id="darkin"type="button" onclick="dark()" class="Dark" style="float: inline-end;">Dark Mode</button>
+<button id="darkin"type="button" onclick="dark()" class="Dark" style="float: inline-end">Dark Mode</button>
 <h2 class="default2">Japanese Wordle</h2> 
 <h3 id="storage" class="default"></h3>
 <h3 id="inside" class="default"></h3>
 
-<form>
+<form >
 <input type="text" id="guessfield" value="" onkeyup="updateText()", class="default">
-<button type="button" id="Enter" value="" onclick="updateThingy()", class="default" style="background-color: rgb(144, 190, 132);">Enter</button>
+<!-- <button type="button" id="Enter" value="" onclick="updateThingy()", class="default" style="background-color: rgb(144, 190, 132);">Enter</button> -->
+<input type="submit"id="Enter" value="Enter" onclick="updateThingy(event)", class="default" style="background-color: rgb(144, 190, 132);">
 <h2 id="lencount" class="default2"></h2>
+
 </form>
 <button type="button" onclick="Clear()" class="default" style="background-color: rgb(190, 132, 132);">Reset</button>
 <h1 class="default" id="kana list">
 あいうえお　アイウエオ　ぁぃぅぇぉ<br>
 かきくけこ　カキクケコ　ァィゥェォ<br>
-さしすせそ　サシスセソ　ッ　　　っ<br>
+さしすせそ　サシスセソ　ッ　ー　っ<br>
 たちつてと　タチツテト　ゃ　ゅ　ょ<br>
 なにぬねの　ナニヌネノ　ャ　ュ　ョ<br>
 はひふへほ　ハヒフヘホ<br>
-まみむめみ　マミムメミ<br>
+まみむめも　マミムメモ<br>
 や　ゆ　よ　ヤ　ユ　ヨ<br>
 らりるれろ　ラリルレロ<br>
 わ　ん　を　ワ　ン　ャ<br>

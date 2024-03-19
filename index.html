@@ -7,6 +7,8 @@
     <meta property="og:description" content="Created by M.J" /> 
     <meta property="og:image" content="https://catbot20222.github.io/favicon.png" /> 
     <meta property="og:url" content="https://catbot20222.github.io/" />
+    <meta property="og:site_name" content="M.J" />
+    <meta name="theme-color" content="#ba563a">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
@@ -17,6 +19,13 @@
     font-weight: 500;
     font-style: normal;
     line-height: 0.9;
+    }
+    .default2 {
+    font-family: "Noto Sans JP", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 0.0;
     }
     /* alex turner is my hero */
     .wrong { 
@@ -57,7 +66,7 @@
     }
         </style>
 <script>
-    const twana = [
+const twana = [
     "いす",
     "うえ",
     "さん",
@@ -71,19 +80,30 @@
     "すきじゃない",
     "たのしい",
     "おかしい",
-    "かっこいい"
-    ];
+    "かっこいい",
+    "うしろ",
+    "ひろい",
+    "いいえ",
+    "ぼく",
+    "わたし",
+    "かわいい",
+    "こわい",
+    "おおきい",
+    "おいしい"
+];
     
 var randTwana = twana[Math.floor(Math.random() * twana.length)];
 var correct = []
 var guesses = []
-function Clear(string) {
-document.getElementById("kana list").innerHTML = "あいうえお　アイウエオ　ぁぃぅぇぉ<br>かきくけこ　カキクケコ　ァィゥェォ<br>さしすせそ　サシスセソ　ッ　　　っ<br>たちつてと　タチツテト　ゃ　ゅ　ょ<br>なにぬねの　ナニヌネノ　ャ　ュ　ョ<br>はひふへほ　ハヒフヘホ<br>まみむめみ　マミムメミ<br>や　ゆ　よ　ヤ　ユ　ヨ<br>らりるれろ　ラリルレロ<br>わ　ん　を　ワ　ン　ャ<br>がぎぐげご　ガギグゲゴ<br>ざじずせぞ　ザジズセゾ<br>だ　　でど　ダ　　デド<br>ばびぶべぼ　バビブベボ<br>ぱぴぷぺぽ　パピプペポ<br>";
-document.getElementById("storage").innerHTML = ''
-
-    
-   
-
+function setLen() {  
+    document.getElementById("lencount").innerHTML = randTwana.length + " Kana Long";
+}
+function Clear() {  
+    randTwana = twana[Math.floor(Math.random() * twana.length)];
+    randTwana.length + " Kana Long"
+    document.getElementById("kana list").innerHTML = "あいうえお　アイウエオ　ぁぃぅぇぉ<br>かきくけこ　カキクケコ　ァィゥェォ<br>さしすせそ　サシスセソ　ッ　　　っ<br>たちつてと　タチツテト　ゃ　ゅ　ょ<br>なにぬねの　ナニヌネノ　ャ　ュ　ョ<br>はひふへほ　ハヒフヘホ<br>まみむめみ　マミムメミ<br>や　ゆ　よ　ヤ　ユ　ヨ<br>らりるれろ　ラリルレロ<br>わ　ん　を　ワ　ン　ャ<br>がぎぐげご　ガギグゲゴ<br>ざじずせぞ　ザジズセゾ<br>だ　　でど　ダ　　デド<br>ばびぶべぼ　バビブベボ<br>ぱぴぷぺぽ　パピプペポ<br>";
+    document.getElementById("storage").innerHTML = ''
+    var guesses = []
 };
 function checkAnswer(guess, answer) {
     var output = ""
@@ -94,7 +114,7 @@ function checkAnswer(guess, answer) {
             document.getElementById("kana list").innerHTML = document.getElementById("kana list").innerHTML.replace(guess[i], `<mark class='green'>${guess[i]}</mark>`);
             output += `<mark class='green'>${guess[i]}</mark>`
             correct[guess[i]] = 'true'
-            answer = answer.substring(0,i) + "_"　+ answer.substring(i+1) 
+            answer = answer.substring(0,i) + "_" + answer.substring(i+1) 
         } else if (answer.includes(guess[i]) && correct[guess[i]] != 'true'){
             document.getElementById("kana list").innerHTML = document.getElementById("kana list").innerHTML.replace(guess[i], `<mark class='yellow'>${guess[i]}</mark>`);
             output += `<mark class='yellow'>${guess[i]}</mark>`
@@ -126,7 +146,6 @@ function updateThingy() {
         alert(`You've already tried answering ${inputKana}!`);
         return false;
     }
-    alert(guesses)
     guesses.push(`${inputKana}`)
     highlightedinput = checkAnswer(inputKana,randTwana)
     document.getElementById("storage").innerHTML = document.getElementById("storage").innerHTML + '<br>' +highlightedinput;
@@ -141,7 +160,7 @@ function updateText() {
 </script>
 </head>
 
-<body>
+<body onload="setLen()">
 <h2 class="default">Japanese Wordle</h2>
 <h3 id="storage" class="default"></h3>
 <h3 id="inside" class="default"></h3>
@@ -149,6 +168,7 @@ function updateText() {
 <form>
 <input type="text" id="guessfield" value="" onkeyup="updateText()", class="default">
 <button type="button" id="Enter" value="" onclick="updateThingy()", class="default">Enter</button>
+<h2 id="lencount" class="default2"></h2>
 </form>
 <button type="button" onclick="Clear()" class="default">Reset</button>
 <h1 class="default" id="kana list">

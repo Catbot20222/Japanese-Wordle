@@ -89,6 +89,18 @@
        height: 1.15em;
        line-height: 1.1;
     }
+    .Easy {
+    background-color: rgb(125, 224, 100);
+    color: rgb(63, 63, 63);
+    }
+    .Medium {
+    background-color: rgb(233, 179, 30);
+    color: rgb(59, 59, 59);
+    }
+    .Hard {
+    background-color: rgb(199, 27, 27);
+    color: rgb(232, 255, 227); 
+    }
         </style>
 <script>
 kanafull = "あいうえおアイウエオぁぃぅぇぉかきくけこカキクケコァィゥェォさしすせそサシスセソッーったちつてとタチツテトゃゅょなにぬねのナニヌネノャュョはひふへほハヒフヘホまみむめもマミムメモやゆよヤユヨらりるれろラリルレロわんをワンャがぎぐげごガギグゲゴざじずせぞザジズセゾだでどダデドばびぶべぼバビブベボぱぴぷぺぽパピプペポ";
@@ -107,37 +119,42 @@ function dark() {
 
 }
 const twana = [
-    "いす",
-    "うえ",
-    "さん",
-    "はこ",
-    "いい",
-    "すき",
-    "はい",
-    "した",
-    "まえ",
-    "なか",
-    "すきじゃない",
-    "たのしい",
-    "おかしい",
-    "かっこいい",
-    "うしろ",
-    "ひろい",
-    "いいえ",
-    "ぼく",
-    "わたし",
-    "かわいい",
-    "こわい",
-    "おおきい",
-    "おいしい"
+    "おはよう", "よろしく", "いもうと", "おとうと", "ともだち", "やさしい", "かわいい", "きびしい", "みなさん", "こうえん", "はじめまして", "こんにちは", "おはようございます", "どうぞよろしく", "かぞく", "うち", "せんせい", "ありがとう", "ごめんなさい", "ごめん", "おかあさん", "おとうさん", "おねえさん", "おにいさん", "おばあさん", "おじいさん", "あたまがいい", "おもしろい", "かわいい", "きれい", "かっこいい", "きびしい", "げんき", "しずか", "つかいます", "あそびます", "します", "そうじします", "りょうりします", "います", "あります", "いきます", "みます", "よみます", "かきます", "べんきょうします", "あそびます", "げつようび", "かようび", "すいようび", "もくようび", "きんようび", "どようび", "にちようび"
 ];
     
 var randTwana = twana[Math.floor(Math.random() * twana.length)];
 var guesses = []
 var closeg = []
 var correct = []
+var closet = []
+var diff = "Easy"
 function setLen() {  
     document.getElementById("lencount").innerHTML = randTwana.length + " Kana Long";
+    document.getElementById("chall").classList.toggle(diff);
+}
+function switchChallenge() {
+    document.getElementById("chall").classList.toggle(diff);
+    if (diff == "Easy") {
+        diff = "Medium"
+        const twana = [
+            "あかるい", "あたらしい", "わるい", "せまい", "ひろい", "ちいさい", "おおきい", "きたない", "うるさい", "あかい", "あおい", "きいろい", "くろい", "すてき", "べんり", "じてんしゃ", "バス", "えいがかん", "きっさてん", "デパート", "としょかん", "レストラン", "うみ", "まち", "えき", "いっしょ", "しゅみ", "たんじょうび", "カラオケ", "バーベキュー", "うた", "うんどう", "あさごはん", "ひるごはん", "よるごはん", "ゆうがた", "のります", "つきます", "でかきます", "きます", "かいまます", "うたいます", "はじまります", "あいます", "ききます", "はなします", "わかります", "せんしゅう", "こんしゅう", "らいしゅう", "しゅうまつ", "ひま"
+        ];
+    } else if (diff == "Medium") {
+        diff = "Hard"
+        const twana = [
+            "あかるい", "あたらしい", "わるい", "せまい", "ひろい", "ちいさい", "おおきい", "きたない", "うるさい", "あかい", "あおい", "きいろい", "くろい", "すてき", "べんり", "じてんしゃ", "バス", "えいがかん", "きっさてん", "デパート", "としょかん", "レストラン", "うみ", "まち", "えき", "いっしょ", "しゅみ", "たんじょうび", "カラオケ", "バーベキュー", "うた", "うんどう", "あさごはん", "ひるごはん", "よるごはん", "ゆうがた", "のります", "つきます", "でかきます", "きます", "かいまます", "うたいます", "はじまります", "あいます", "ききます", "はなします", "わかります", "せんしゅう", "こんしゅう", "らいしゅう", "しゅうまつ", "ひま",
+            "おはよう", "よろしく", "いもうと", "おとうと", "ともだち", "やさしい", "かわいい", "きびしい", "みなさん", "こうえん", "はじめまして", "こんにちは", "おはようございます", "どうぞよろしく", "かぞく", "うち", "せんせい", "ありがとう", "ごめんなさい", "ごめん", "おかあさん", "おとうさん", "おねえさん", "おにいさん", "おばあさん", "おじいさん", "あたまがいい", "おもしろい", "かわいい", "きれい", "かっこいい", "きびしい", "げんき", "しずか", "つかいます", "あそびます", "します", "そうじします", "りょうりします", "います", "あります", "いきます", "みます", "よみます", "かきます", "べんきょうします", "あそびます", "げつようび", "かようび", "すいようび", "もくようび", "きんようび", "どようび", "にちようび"
+        ];
+    } else {
+        diff = "Easy"
+        const twana = [
+            "おはよう", "よろしく", "いもうと", "おとうと", "ともだち", "やさしい", "かわいい", "きびしい", "みなさん", "こうえん", "はじめまして", "こんにちは", "おはようございます", "どうぞよろしく", "かぞく", "うち", "せんせい", "ありがとう", "ごめんなさい", "ごめん", "おかあさん", "おとうさん", "おねえさん", "おにいさん", "おばあさん", "おじいさん", "あたまがいい", "おもしろい", "かわいい", "きれい", "かっこいい", "きびしい", "げんき", "しずか", "つかいます", "あそびます", "します", "そうじします", "りょうりします", "います", "あります", "いきます", "みます", "よみます", "かきます", "べんきょうします", "あそびます", "げつようび", "かようび", "すいようび", "もくようび", "きんようび", "どようび", "にちようび"
+        ];
+    }
+    document.getElementById("chall").innerHTML =  diff
+    document.getElementById("chall").classList.toggle(diff);
+    Clear()
+
 }
 function Clear() {
     closeg = []  
@@ -153,6 +170,7 @@ function checkAnswer(guess, answer) {
     var output = ""
     var lengthy = document.getElementById("storage").innerHTML.length;
     closeg = []
+    closet = []
     for (let i = 0; i < guess.length; i++) {
         if (guess[i] == answer[i] ) {
             document.getElementById("kana list").innerHTML = document.getElementById("kana list").innerHTML.replace(guess[i], `<mark class='green'>${guess[i]}</mark>`);
@@ -162,17 +180,18 @@ function checkAnswer(guess, answer) {
         } else if (answer.includes(guess[i]) && guess[answer.indexOf(guess[i])] != guess[i] && answer.indexOf(guess[i],closeg[guess[i]]+1) != -1){
            
             output += `<mark class='yellow'>${guess[i]}</mark>`
+            closet[guess[i]] = 'true'
             if (closeg[guess[i]] == []){
                 closeg[guess[i]] = answer.indexOf(guess[i])
             } else {
                 closeg[guess[i]] = answer.indexOf(guess[i],closeg[guess[i]]+1)
             }
-            if (correct[guess[i]] != 'true') {
+            if (correct[guess[i]] != 'true' ) {
                 document.getElementById("kana list").innerHTML = document.getElementById("kana list").innerHTML.replace(guess[i], `<mark class='yellow'>${guess[i]}</mark>`);
             }
         } else if (answer.includes(guess[i]) == false || guess[answer.indexOf(guess[i])] == guess[i] || answer.indexOf(guess[i],closeg[guess[i]]+1) == -1){
             output += `<mark class='wrong'>${guess[i]}</mark>`
-            if (correct[guess[i]] != 'true') {
+            if (correct[guess[i]] != 'true' && closet[guess[i]] != 'true') {
                 document.getElementById("kana list").innerHTML = document.getElementById("kana list").innerHTML.replace(guess[i], `<mark class='wrong'>${guess[i]}</mark>`);
             }
         }
@@ -212,18 +231,17 @@ function updateText() {
 </script>
 </head>
 
-<body onload="setLen()" class="default">
+<body onload="setLen() + dark()" class="default">
 <button id="darkin"type="button" onclick="dark()" class="Dark" style="float: inline-end">Dark Mode</button>
 <h2 class="default2">Japanese Wordle</h2> 
 <h3 id="storage" class="default"></h3>
 <h3 id="inside" class="default"></h3>
 
 <form >
-<input type="text" id="guessfield" value="" onkeyup="updateText()", class="default">
-<!-- <button type="button" id="Enter" value="" onclick="updateThingy()", class="default" style="background-color: rgb(144, 190, 132);">Enter</button> -->
-<input type="submit"id="Enter" value="Enter" onclick="updateThingy(event)", class="default" style="background-color: rgb(144, 190, 132);">
-<h2 id="lencount" class="default2"></h2>
-
+    <input type="text" id="guessfield" value="" onkeyup="updateText()", class="default">
+    <input type="submit"id="Enter" value="Enter" onclick="updateThingy(event)", class="default" style="background-color: rgb(144, 190, 132);">
+    <button type="button" id="chall" onclick="switchChallenge()" class="default">Easy</button>
+    <h2 id="lencount" class="default2"></h2>
 </form>
 <button type="button" onclick="Clear()" class="default" style="background-color: rgb(190, 132, 132);">Reset</button>
 <h1 class="default" id="kana list">
